@@ -1,4 +1,6 @@
 import scala.collection.mutable
+import scala.jdk.CollectionConverters.*
+import java.awt.font.TextAttribute.* 
 
 @main def main = 
 
@@ -51,3 +53,54 @@ import scala.collection.mutable
     sortedMap.foreach((k, v) => println(s"$k: $v"))     // this visits keys in sorted order
 
     // interoperating with Java
+    val ids = java.time.ZoneId.SHORT_IDS.asScala
+    ids.foreach((k, v) => println(s"$k: $v"))
+
+    val attrs = Map(FAMILY -> "Serif", SIZE -> 12)
+    val font = java.awt.Font(attrs.asJava)
+
+    // the Option type
+    var friend: Option[String] = Some("Fred")
+    friend = None
+
+    val ages = Map("Jim" -> 23, "Bob" -> 45, "Joe" -> 53)
+    val bobAge = ages.get("Bob") // Some(45)
+    val samAge = ages.get("Sam") // None
+
+    if bobAge.isEmpty
+        then println("Bob's age not found")
+        else println(s"Bob's age: ${bobAge.get}")
+
+    if samAge.isEmpty
+        then println("Sam's age not found")
+        else println(s"Sam's age: ${samAge.get}")
+
+    for age <- bobAge do println(age)
+    for age <- samAge do println(age)
+
+    val olderAge = bobAge.map(_ + 20)
+    val minAge = bobAge.filter(_ > 21)
+    olderAge.foreach(println)
+    minAge.foreach(println)
+
+    // Tuples
+    val t = (1, 3.14, "Bob")
+    val second = t(1)
+    var i = 0
+    val first = t(i)
+    println(first)
+    println(second)
+    val (fst, scd, thr) = t // destructuring
+    println(s"$fst, $scd, $thr")
+    val newTup = ("x", 3) ++ ("y", 4)
+    println(newTup)
+    val partitionedString = "New York".partition(_.isUpper)
+    println(partitionedString)
+
+    // Zipping
+    val symbols = Array("<", "-", ">")
+    val counts = Array(2, 10, 2)
+    val pairs = symbols.zip(counts)
+    for (s, n) <- pairs do print(s * n)
+    println()
+    

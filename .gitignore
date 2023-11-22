@@ -2,3 +2,4 @@
 *.tasty
 .metals
 .vscode
+.scala-build
