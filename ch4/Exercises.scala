@@ -144,7 +144,14 @@ import scala.collection.mutable.LinkedHashMap
     // 12. Write a function lteqgt(values: Array[Int], v: Int) that returns a triple containing 
     // the counts of values less than v, equal to v, and greater than v.
     println("<<----12---->>")
+    def lteqgt(arr: Array[Int], v: Int): Tuple = (arr.count(_ < v), arr.count(_ == v), arr.count(_ > v))
+    val arr4 = Array(3, 2, -1, 2, 1, 5, 4, 4, 2, 3, 1, -5, -6, -5)
+    println(lteqgt(arr4, 1))
+    println(lteqgt(arr4, 2))
+    println(lteqgt(arr4, -1))
 
     // 13. What happens when you zip together two strings, such as "Hello".zip("World")? Come up 
     // with a plausible use case.
     println("<<----13---->>")
+    val zipped = "Hello".zip("World")
+    println(zipped)
