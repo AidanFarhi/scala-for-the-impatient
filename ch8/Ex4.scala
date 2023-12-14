@@ -17,10 +17,7 @@ abstract class Item:
     def description: String
 
 
-class SimpleItem(val itemPrice: Double, val itemDescription: String) extends Item:
-
-    override def price: Double = itemPrice
-    override def description: String = itemDescription
+class SimpleItem(val price: Double, val description: String) extends Item
 
 
 class Bundle extends Item:
@@ -28,8 +25,8 @@ class Bundle extends Item:
     private val items = ArrayBuffer[Item]()
 
     def addItem(item: Item) = items.addOne(item)
-    override def price: Double = items.map(i => i.price).sum
-    override def description: String = "A collection of items"
+    override def price: Double = items.map(_.price).sum
+    override def description: String = items.map(_.description).mkString(sep = ",")
 
 
 @main def ex4 =
@@ -40,4 +37,4 @@ class Bundle extends Item:
     bundle.addItem(SimpleItem(93.2, "a shield"))
 
     assert(bundle.price == 126.2)
-    assert(bundle.description == "A collection of items")
+    assert(bundle.description == "a helmet,a sword,a shield")
